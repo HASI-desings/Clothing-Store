@@ -1,6 +1,6 @@
 # Inspiration & Reference Analysis: DARZ · Cut Light
 
-_Status: **draft** (2026-11-20). Awaiting Phase 3 approval._
+_Status: **approved** (2026-11-20)._
 
 > **Method note.** This session's network policy blocks direct visits to outside sites (the browser got `ERR_TUNNEL_CONNECTION_FAILED`; fetches failed DNS). Research ran through web search. References are described from search results plus prior knowledge, **not from live screenshots**. Before Phase 6 (hero explorations), the top references should be checked live: either the environment allows these hosts, or you send screenshots or screen recordings.
 
