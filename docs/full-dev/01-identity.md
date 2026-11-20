@@ -1,13 +1,20 @@
 # Brand Identity & Creative Requirements: Contemporary Men's Clothing Store
 
-_Status: **draft** (2026-11-20). Awaiting Phase 1 approval._ · Items marked **[proposal]** are my inferences, not your decisions.
+_Status: **draft v2** (2026-11-20). Awaiting Phase 1 approval._ · Items marked **[proposal]** are my inferences, not your decisions.
 
 ## What it is
 A men's clothing label sold online, with a curated range: casual, formal, traditional (kurta, shalwar kameez, waistcoat), shirts and trousers, unstitched fabric, seasonal drops, plus accessories as an optional extra. It is two products in one:
 1. **The storefront.** Customers explore collections like exhibitions, study the fabric and construction, choose a size and colour, and order.
 2. **The atelier (admin).** The owner manages products, collections, prices, stock, images, orders and the homepage.
 
-Business model **[proposal]**: direct-to-consumer, made-to-stock, with Cash on Delivery as the default payment and online card/wallet payment as the second option.
+**Decision (you, 2026-11-20): a concept build for now, made to the standard of a real launch, so it can be sold to a buyer** (a menswear brand owner, or an investor/partner).
+
+What that means for the build:
+- **It must demo like a real store.** A realistic seeded catalogue, working checkout (COD), and a working admin with a demo login, so a buyer can click through everything in a pitch.
+- **It must be rebrandable.** The brand name, logo, colours and contact details are settings, not hard-coded, so a buyer can make it theirs without a rebuild.
+- **The concept is the product being sold.** The architecture-of-clothing idea and the Style Studio are the parts a buyer can't get from a Shopify theme. They get the most attention.
+
+Business model of the demo brand **[proposal]**: direct-to-consumer, made-to-stock, Cash on Delivery by default, with online payment shown as ready to connect.
 
 ## Core creative statement
 > "Style isn't something you put on. It's something you construct."
@@ -79,7 +86,7 @@ Local men's brands mostly share one look: a full-bleed model banner, a "SALE UP 
 - Budget: student budget, so use free tiers (Vercel Hobby, Supabase Free).
 - Stack direction: Next.js + Supabase (database, auth, storage for images) + Vercel.
 - Maintainer: you, plus whoever runs the admin.
-- Photography: **unknown, and the biggest risk.** The whole concept depends on editorial images.
+- Photography: there is no real shoot (concept build). **[proposal]** Use free-licence editorial menswear photography (Unsplash/Pexels, credited, swappable from the admin) for the demo, plus close-up fabric textures I generate myself for the material studies. Still the biggest visual risk, and Phase 3 will judge it.
 - Legal: privacy policy, returns/exchange policy, payment-gateway terms.
 
 ## Competitors to review (Phase 3 verifies these live)
@@ -105,11 +112,15 @@ Local men's brands mostly share one look: a full-bleed model banner, a "SALE UP 
 - The Style Studio feels like a gimmick that nobody uses twice. **Failure.**
 - The owner needs a developer to change a price or the homepage. **Failure.**
 
+## Defaults I'm proposing (the concept build answers the remaining questions)
+| Question | Default **[proposal]** |
+|---|---|
+| Brand name | I propose a shortlist in Phase 2, derived from the concept. It is a setting, so a buyer can rename it |
+| Prices | Demo prices in PKR, mid-premium: shirts 3,500–6,500 · trousers 4,000–7,000 · kurta sets 6,000–14,000 · formal 18,000–45,000 · unstitched 3,000–9,000 per suit |
+| Payments | COD working end-to-end. Online gateway shown as an integration slot (Safepay/PayFast), not live |
+| Delivery | Nationwide flat rate plus a free-delivery threshold, set from the admin |
+| Language | English at launch; the structure is ready for Urdu |
+| Deadline | None given. Quality over speed |
+
 ## Open questions
-1. Is this your own real brand that will hold stock, or a concept build for now? (Asked first, because it changes the most.)
-2. Brand name: do you have one, or should I propose names in Phase 2?
-3. Price range per category (PKR)?
-4. Photography: will you shoot real products, or launch with placeholders?
-5. Payments: COD only at launch, or also a gateway (Safepay, PayFast, JazzCash/Easypaisa)?
-6. Delivery: nationwide via courier (Leopards, TCS, PostEx)? International later?
-7. Deadline?
+- None blocking. Anything above can be changed at the Phase 1 gate.
