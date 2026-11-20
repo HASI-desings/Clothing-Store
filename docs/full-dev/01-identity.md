@@ -1,6 +1,6 @@
 # Brand Identity & Creative Requirements: Contemporary Men's Clothing Store
 
-_Status: **draft v2** (2026-11-20). Awaiting Phase 1 approval._ · Items marked **[proposal]** are my inferences, not your decisions.
+_Status: **approved** (2026-11-20)._ · Items marked **[proposal]** are my inferences, not your decisions.
 
 ## What it is
 A men's clothing label sold online, with a curated range: casual, formal, traditional (kurta, shalwar kameez, waistcoat), shirts and trousers, unstitched fabric, seasonal drops, plus accessories as an optional extra. It is two products in one:
