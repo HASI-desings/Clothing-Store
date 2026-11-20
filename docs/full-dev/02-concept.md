@@ -1,6 +1,6 @@
 # Creative Concept: "Cut Light" · Tailor's Pattern × Jali Screen
 
-_Status: **draft** (2026-11-20). Awaiting Phase 2 approval._
+_Status: **approved** (2026-11-20). Name: DARZ._
 
 ## Objects
 - **A (identity object): the tailor's paper pattern.** The flat blueprint of a garment: cut paper pieces marked with notches, grainlines, fold lines and "CUT 2". It is literally where clothing is *constructed* before it is worn. It is the truest object behind "style is constructed".
