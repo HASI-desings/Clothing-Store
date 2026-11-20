@@ -1,0 +1,77 @@
+.bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: var(--z-bar);
+  padding-top: env(safe-area-inset-top, 0px);
+  background: transparent;
+  transition: transform var(--dur-assemble) var(--ease-cut), background-color var(--dur-ui) var(--ease-cut), border-color var(--dur-ui) var(--ease-cut);
+  border-bottom: 1px solid transparent;
+}
+.bar[data-scrolled="true"] {
+  background: color-mix(in srgb, var(--color-bg) 92%, transparent);
+  backdrop-filter: saturate(1.1) blur(6px);
+  border-bottom-color: var(--color-line);
+}
+.bar[data-hidden="true"] { transform: translateY(-100%); }
+.inner {
+  max-width: calc(var(--container));
+  margin-inline: auto;
+  padding: 10px max(var(--gutter), env(safe-area-inset-right, 0px)) 10px var(--gutter);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+.brand {
+  font-weight: 900;
+  font-variation-settings: "wdth" 62;
+  font-size: 30px;
+  line-height: 1;
+  letter-spacing: -0.01em;
+  color: var(--color-text);
+  text-decoration: none;
+  padding-block: 6px;
+}
+.nav { display: flex; align-items: center; gap: clamp(4px, 1.6vw, 22px); }
+.nav > a:not(.icon) {
+  color: var(--color-text);
+  text-decoration: none;
+  font-size: var(--fs-ui);
+  font-weight: 600;
+  padding: 12px 4px;
+  background: linear-gradient(var(--color-accent), var(--color-accent)) no-repeat 0 calc(100% - 8px) / 0 1.5px;
+  transition: background-size var(--dur-ui) var(--ease-cut);
+}
+.nav > a:not(.icon):hover { background-size: 100% 1.5px; }
+.icon {
+  appearance: none;
+  background: none;
+  border: 0;
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  color: var(--color-text);
+  cursor: pointer;
+  position: relative;
+}
+.count {
+  position: absolute;
+  top: 5px;
+  right: 3px;
+  min-width: 17px;
+  height: 17px;
+  padding: 0 4px;
+  border-radius: var(--radius-round);
+  background: var(--color-accent);
+  color: var(--color-on-accent);
+  font-size: 10px;
+  font-weight: 700;
+  display: grid;
+  place-items: center;
+  font-variant-numeric: tabular-nums;
+}
+@media (max-width: 640px) { .hideSm { display: none; } }
+@media (prefers-reduced-motion: reduce) { .bar { transition: none; } }

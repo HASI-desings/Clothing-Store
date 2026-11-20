@@ -1,0 +1,4 @@
+.main { min-height: 80svh; display: grid; align-content: center; padding-block: 140px 96px; }
+.main :global(.container) { display: grid; gap: var(--sp-5); justify-items: start; }
+.title { font-size: var(--fs-display); font-weight: 900; font-variation-settings: "wdth" 62; line-height: 0.84; letter-spacing: -0.02em; text-transform: capitalize; overflow-wrap: anywhere; }
+.text { font-size: var(--fs-lede); color: var(--color-text-2); max-width: 36ch; line-height: 1.3; }

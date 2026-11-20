@@ -29,8 +29,8 @@
   --fabric-1: #2A3140; --fabric-2: #323B4D; --fabric-3: #1F2531;
 
   /* ---------- Typography ---------- */
-  --font-sans:  "Archivo", "Arial Narrow", system-ui, -apple-system, "Segoe UI", sans-serif;
-  --font-notation: "Martian Mono", ui-monospace, "SFMono-Regular", Menlo, monospace; /* pattern notation ONLY */
+  --font-sans:  var(--font-archivo), "Archivo", "Arial Narrow", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-notation: var(--font-martian), "Martian Mono", ui-monospace, "SFMono-Regular", Menlo, monospace; /* pattern notation ONLY */
 
   /* Width axis = the brand's material: condensed for structure, normal for reading */
   --wdth-structure: 62;  --wdth-heading: 72;  --wdth-sub: 85;  --wdth-text: 100;  --wdth-wide: 112;

@@ -1,0 +1,11 @@
+.frame { position: relative; overflow: hidden; aspect-ratio: 4 / 5; width: 100%; }
+.layer { position: absolute; inset: 0; display: grid; place-items: center; }
+.garment { width: 78%; height: auto; transform: rotate(-2deg); filter: drop-shadow(10px 16px 18px rgb(0 0 0 / 0.28)); }
+.seam {
+  position: absolute; top: -10%; bottom: -10%; width: 0; left: -20%;
+  border-left: 1px dashed #F6F6F2; opacity: 0; transform: rotate(14deg); pointer-events: none;
+}
+.label {
+  position: absolute; left: 14px; bottom: 12px;
+  color: var(--color-text); background: var(--color-surface); padding: 4px 8px;
+}

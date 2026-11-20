@@ -1,0 +1,18 @@
+.row { display: flex; gap: 12px; flex-wrap: wrap; }
+.sw {
+  appearance: none;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 1px solid var(--color-line-strong);
+  border-radius: var(--radius-1);
+  cursor: pointer;
+  background:
+    repeating-linear-gradient(-38deg, rgb(255 255 255 / 0.08) 0 2px, transparent 2px 5px, rgb(0 0 0 / 0.14) 5px 6px),
+    var(--sw);
+  outline: 1px dashed transparent;
+  outline-offset: 4px;
+  transition: outline-color var(--dur-ui) var(--ease-cut), outline-offset var(--dur-ui) var(--ease-cut);
+}
+.sw[aria-checked="true"] { outline-color: var(--color-accent); outline-offset: 4px; }
+.sw:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 4px; }

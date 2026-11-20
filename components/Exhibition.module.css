@@ -1,0 +1,88 @@
+.section { padding-block: var(--section-gap); }
+.head {
+  display: grid;
+  grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+  gap: var(--sp-6);
+  align-items: end;
+  margin-bottom: var(--sp-8);
+}
+.titleWrap { position: relative; display: grid; gap: var(--sp-3); padding: var(--sp-6) 0; isolation: isolate; }
+.light { z-index: -1; inset: -20% -10% -20% -6%; width: 116%; height: 140%; }
+.mark { color: var(--color-accent); }
+.curator { font-size: var(--fs-body-lg); color: var(--color-text-2); max-width: 44ch; }
+
+.wall {
+  list-style: none;
+  margin-top: 0;
+  margin-bottom: 0;
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: var(--sp-7) var(--col-gap);
+  align-items: start;
+}
+.c1 { grid-column: 1 / span 6; grid-row: span 2; }
+.c2 { grid-column: 8 / span 3; }
+.c3 { grid-column: 11 / span 2; margin-top: var(--sp-9); }
+.c4 { grid-column: 7 / span 3; margin-top: var(--sp-6); }
+.c5 { grid-column: 10 / span 3; margin-top: calc(-1 * var(--sp-8)); }
+.c6 { grid-column: 1 / span 4; }
+.c7 { grid-column: 6 / span 3; margin-top: var(--sp-7); }
+.note { grid-column: 10 / span 3; align-self: center; display: grid; gap: var(--sp-3); padding: var(--sp-5); border: 1px dashed var(--color-accent); justify-items: start; }
+.note .notation { color: var(--color-accent); }
+.noteText { font-size: var(--fs-h3); font-weight: 750; font-variation-settings: "wdth" 80; line-height: 1.1; }
+
+.cell { display: grid; gap: 10px; min-width: 0; }
+.open { appearance: none; border: 0; padding: 0; background: none; cursor: pointer; display: block; width: 100%; text-align: left; }
+.open:focus-visible { outline-offset: 6px; }
+.art {
+  position: relative;
+  display: grid;
+  place-items: center;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  /* the notch cut into the bottom edge; it widens on hover */
+  clip-path: polygon(0 0, 100% 0, 100% 100%, calc(50% + 8px) 100%, 50% calc(100% - 10px), calc(50% - 8px) 100%, 0 100%);
+  transition: clip-path var(--dur-assemble) var(--ease-cut);
+}
+.c1 .art { aspect-ratio: 5 / 6; }
+.garment {
+  width: 70%;
+  height: auto;
+  transform: rotate(-2deg);
+  filter: drop-shadow(10px 16px 16px rgb(0 0 0 / 0.22));
+  transition: transform var(--dur-reveal) var(--ease-cut);
+}
+.open:hover .art, .open:focus-visible .art {
+  clip-path: polygon(0 0, 100% 0, 100% 100%, calc(50% + 16px) 100%, 50% calc(100% - 18px), calc(50% - 16px) 100%, 0 100%);
+}
+.open:hover .garment { transform: rotate(0deg) scale(1.04); }
+.badge { position: absolute; left: 14px; top: 14px; background: var(--color-surface); color: var(--color-text); padding: 4px 8px; }
+.meta { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
+.name { font-size: 16px; font-weight: 650; font-variation-settings: "wdth" 88; line-height: 1.2; }
+.c1 .name { font-size: var(--fs-h3); font-weight: 750; font-variation-settings: "wdth" 80; }
+.price { font-weight: 650; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.avail { font-size: var(--fs-small); color: var(--color-text-muted); display: flex; flex-wrap: wrap; align-items: center; gap: 4px 0; }
+.dots { display: inline-flex; gap: 4px; margin-left: 10px; }
+.dots i { width: 10px; height: 10px; border-radius: var(--radius-round); border: 1px solid var(--color-line-strong); }
+
+@media (max-width: 1100px) {
+  .wall { grid-template-columns: repeat(8, minmax(0, 1fr)); }
+  .c1 { grid-column: 1 / span 5; grid-row: span 2; }
+  .c2 { grid-column: 6 / span 3; }
+  .c3 { grid-column: 6 / span 3; margin-top: 0; }
+  .c4 { grid-column: 1 / span 3; margin-top: 0; }
+  .c5 { grid-column: 4 / span 3; margin-top: var(--sp-7); }
+  .c6 { grid-column: 1 / span 4; }
+  .c7 { grid-column: 5 / span 4; margin-top: var(--sp-6); }
+  .note { grid-column: 1 / -1; }
+}
+@media (max-width: 767px) {
+  .head { grid-template-columns: minmax(0, 1fr); margin-bottom: var(--sp-6); }
+  .wall { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--sp-6) var(--col-gap); }
+  .c1 { grid-column: 1 / -1; grid-row: auto; }
+  .c2, .c3, .c4, .c5, .c6, .c7 { grid-column: auto; margin-top: 0; }
+  .c3, .c7 { margin-top: var(--sp-6); }
+  .note { grid-column: 1 / -1; }
+  .meta { flex-direction: column; gap: 2px; }
+}
+@media (prefers-reduced-motion: reduce) { .art, .garment { transition: none; } }

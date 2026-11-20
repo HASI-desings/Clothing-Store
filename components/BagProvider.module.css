@@ -1,0 +1,25 @@
+.region {
+  position: fixed;
+  left: 50%;
+  bottom: calc(20px + env(safe-area-inset-bottom, 0px));
+  transform: translateX(-50%);
+  z-index: var(--z-toast);
+  width: min(440px, calc(100vw - 32px));
+  pointer-events: none;
+}
+.toast {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 20px 15px;
+  background: var(--color-text);
+  color: var(--color-on-text);
+  font-size: var(--fs-ui);
+  font-weight: 550;
+  clip-path: polygon(0 0, 24px 0, 31px 8px, 38px 0, 100% 0, 100% 100%, 0 100%);
+  animation: toast-in var(--dur-assemble) var(--ease-assemble) both;
+}
+@keyframes toast-in {
+  from { transform: translateY(18px); clip-path: polygon(0 0, 24px 0, 31px 8px, 38px 0, 100% 0, 100% 0, 0 0); }
+}
+@media (prefers-reduced-motion: reduce) { .toast { animation: none; } }
