@@ -1,3 +1,4 @@
+import { siteUrl } from "@/lib/site";
 import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
@@ -25,7 +26,7 @@ const martian = localFont({
   fallback: ["ui-monospace", "Menlo", "monospace"],
 });
 
-const site = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
+const site = siteUrl;
 
 export const metadata: Metadata = {
   metadataBase: new URL(site),
