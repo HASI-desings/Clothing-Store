@@ -1,6 +1,6 @@
 # Design System: DARZ · Cut Light
 
-_Status: **draft** (2026-11-20). Awaiting Phase 5 approval._ Tokens: [`styles/tokens.css`](../../styles/tokens.css) · Preview: [`design/design-system.html`](../../design/design-system.html)
+_Status: **approved** (2026-11-20), with switching transitions added at your request._ Tokens: [`styles/tokens.css`](../../styles/tokens.css) · Preview: [`design/design-system.html`](../../design/design-system.html)
 
 ## Typography
 | Role | Family | Weight / width | Size (clamp) | Line height | Tracking |
@@ -87,6 +87,18 @@ _Status: **draft** (2026-11-20). Awaiting Phase 5 approval._ Tokens: [`styles/to
 ## Motion tokens
 - **Eases:** `--ease-cut` cubic-bezier(.2,.7,.2,1) (apertures, sheets) · `--ease-assemble` cubic-bezier(.32,0,.12,1) (pieces meeting at a notch) · `--ease-exit` cubic-bezier(.4,0,1,1).
 - **Durations:** micro 120 · UI 240 · assemble 480 · reveal 700 · lattice drift 26 s. All collapse to 0 under `prefers-reduced-motion`. Nothing bounces.
+
+## Switching transitions (added at approval)
+Every switch uses one of three moves from the concept. Nothing jumps. Live demos are in the preview's **Transitions** section; Phase 7 sets the exact values per page.
+
+| Move | Used for | What happens | Timing |
+|---|---|---|---|
+| **Pull** (fabric pulled across the grain) | Size selector, product tabs, filter chips, Studio slot switcher, admin segmented controls | One selected piece (graphite with a notch) stretches to cover both the old and the new option, then settles on the new one. Labels change colour a beat later. Tab content slides in from the direction of travel | 420–480 ms, `--ease-assemble` |
+| **Bias cut** (cloth cut at 38°) | Colourway switch on product and Studio images | The new photo is revealed by a 38° diagonal wipe, led by a dashed seam line | 560 ms, `--ease-cut` |
+| **Assemble** (through the cut) | Page to page | **Product cell → product page:** the cell's image grows into the product hero aperture while the rest of the wall falls away, then the buy panel assembles piece by piece. **Menu links:** the new page is cut in along a vertical seam from the right while the old page drifts left; its blocks arrive in sequence | 620 ms, stagger 60–70 ms |
+
+- **Implementation:** CSS + Web Animations for in-page switches. The **View Transitions API** in Next.js for page-to-page (shared element = the product aperture), with the same animation as the fallback where it's unsupported.
+- **Rules:** never block input (a new click cancels or finishes the running transition); keyboard arrows drive the same motion; `prefers-reduced-motion` switches instantly; no transition over 700 ms.
 
 ## Anti-generic check
 | Tell | Status |

@@ -180,6 +180,57 @@ input[type=range]{accent-color:var(--color-accent);width:100%}
 
 @media (max-width:900px){.grid3{grid-template-columns:minmax(0,1fr)}.aps{grid-template-columns:repeat(2,minmax(0,1fr))}.patternsheet{grid-template-columns:repeat(2,minmax(0,1fr));grid-auto-rows:56px}.p1,.p2,.p3,.p4,.p5,.p6,.p7{grid-column:span 1;grid-row:span 1}.p1{grid-column:span 2;grid-row:span 2}}
 @media (max-width:700px){.grid2{grid-template-columns:minmax(0,1fr)}.row{grid-template-columns:minmax(0,1fr);gap:6px}.bar nav .hide-sm{display:none}}
+
+/* ===== TRANSITIONS ===== */
+.tx-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--sp-5)}
+.tx-card{background:var(--color-surface);border:1px solid var(--color-line);padding:clamp(18px,3vw,28px);display:grid;gap:var(--sp-4);align-content:start;min-width:0}
+.tx-card h3{font-size:var(--fs-h3);font-weight:700;font-variation-settings:"wdth" 85;line-height:1.15}
+/* sliding size selector: one graphite piece is pulled between sizes */
+.seg{position:relative;display:inline-flex;gap:8px;isolation:isolate}
+.seg button{appearance:none;font:inherit;font-size:var(--fs-ui);font-weight:600;min-width:52px;min-height:48px;padding:0 10px;background:transparent;color:var(--color-text);
+  border:1px solid var(--color-line-strong);border-radius:2px;cursor:pointer;position:relative;z-index:1;transition:color var(--dur-ui) var(--ease-cut) 60ms}
+.seg button[aria-pressed="true"]{color:var(--color-on-text);border-color:transparent}
+.seg button:disabled{color:var(--color-text-muted);background:repeating-linear-gradient(-45deg,transparent 0 6px,var(--color-surface-sunk) 6px 7px);text-decoration:line-through;cursor:not-allowed}
+.seg .ind{position:absolute;top:0;left:0;height:100%;background:var(--color-text);border-radius:2px;z-index:0;pointer-events:none;
+  clip-path:polygon(0 0,calc(50% - 6px) 0,50% 7px,calc(50% + 6px) 0,100% 0,100% 100%,0 100%)}
+.seg .ind::after{content:"";position:absolute;left:6px;right:6px;bottom:6px;height:1px;background:repeating-linear-gradient(90deg,var(--color-on-text) 0 4px,transparent 4px 8px);opacity:.35}
+/* tabs: a chalk cut-line slides under the active tab */
+.tabs{display:flex;gap:clamp(16px,3vw,32px);position:relative;border-bottom:1px solid var(--color-line);overflow-x:auto}
+.tabs button{appearance:none;background:none;border:0;font:inherit;font-size:var(--fs-ui);font-weight:600;color:var(--color-text-2);padding:12px 0 14px;cursor:pointer;white-space:nowrap;transition:color var(--dur-ui) var(--ease-cut)}
+.tabs button[aria-selected="true"]{color:var(--color-text)}
+.tabs .line{position:absolute;bottom:-1px;left:0;height:2px;background:var(--color-accent)}
+.tabs .line::before{content:"";position:absolute;left:50%;top:-7px;transform:translateX(-50%);border-left:5px solid transparent;border-right:5px solid transparent;border-top:6px solid var(--color-accent)}
+.panels{position:relative;min-height:84px;overflow:hidden}
+.panels p{color:var(--color-text)}
+/* colour switch: new colourway is cut in on the bias */
+.bias{position:relative;aspect-ratio:4/5;max-width:260px;width:100%;overflow:hidden;background:var(--color-surface-sunk)}
+.bias .layer{position:absolute;inset:0;background-image:repeating-linear-gradient(-38deg,rgb(255 255 255 / .07) 0 3px,transparent 3px 6px,rgb(0 0 0 / .12) 6px 7px)}
+.bias .seam{position:absolute;top:-10%;bottom:-10%;width:0;border-left:1px dashed var(--color-on-text);opacity:0;pointer-events:none;transform:rotate(14deg)}
+.bias .label{position:absolute;left:12px;bottom:12px;font-family:var(--font-notation);font-size:var(--fs-notation);letter-spacing:.04em;text-transform:uppercase;color:#F6F6F2;z-index:3}
+/* page transition demo */
+.frame{border:1px solid var(--color-line-strong);background:var(--color-bg);position:relative;overflow:hidden;aspect-ratio:16/10;max-width:100%}
+.frame .chrome{position:absolute;top:0;left:0;right:0;height:34px;display:flex;align-items:center;justify-content:space-between;padding:0 12px;border-bottom:1px solid var(--color-line);background:var(--color-bg);z-index:5}
+.frame .chrome b{font-weight:900;font-variation-settings:"wdth" 62;font-size:16px}
+.frame .chrome nav{display:flex;gap:12px;font-size:12px}
+.frame .chrome nav button{appearance:none;background:none;border:0;font:inherit;color:var(--color-text-2);cursor:pointer;padding:4px 0}
+.frame .chrome nav button[aria-current="page"]{color:var(--color-text);text-decoration:underline;text-decoration-color:var(--color-accent);text-underline-offset:4px}
+.page{position:absolute;inset:34px 0 0 0;padding:16px;display:grid;gap:10px;align-content:start;background:var(--color-bg)}
+.page[hidden]{display:none!important}
+.page h4{margin:0;font-size:clamp(18px,3vw,28px);font-weight:900;font-variation-settings:"wdth" 64;line-height:.9}
+.wallmini{display:grid;grid-template-columns:2fr 1fr 1fr;grid-template-rows:1fr 1fr;gap:8px;height:calc(100% - 50px)}
+.wallmini button{appearance:none;border:0;padding:0;cursor:pointer;position:relative;min-height:0}
+.wallmini button span{position:absolute;left:8px;bottom:6px;font-size:10px;font-weight:600;color:#F6F6F2}
+.wallmini .big{grid-row:span 2}
+.prod{grid-template-columns:1.1fr 1fr!important;gap:16px!important;height:100%}
+.prod .hero{height:100%;min-height:0;clip-path:polygon(0 .2%,30% 0,40% 6%,60% 6%,70% 0,100% .2%,100% 100%,0 100%)}
+.prod .panel{display:grid;gap:8px;align-content:start}
+.prod .panel .p{font-weight:650;font-variant-numeric:tabular-nums}
+.prod .back{appearance:none;background:none;border:0;font:inherit;font-size:12px;color:var(--color-accent);cursor:pointer;justify-self:start;padding:0;text-decoration:underline;text-decoration-style:dashed;text-underline-offset:4px}
+.ghost{position:absolute;z-index:6;pointer-events:none}
+.sweep{position:absolute;top:34px;bottom:0;width:0;border-left:1px dashed var(--color-accent);z-index:7;pointer-events:none;opacity:0}
+.c1{background:#2A3140}.c2{background:#7B6A4E}.c3{background:#8D8F8A}.c4{background:#3F4A3C}.c5{background:#5B3A33}
+.tx-note{font-size:var(--fs-small);color:var(--color-text-muted)}
+@media (max-width:900px){.tx-grid{grid-template-columns:minmax(0,1fr)}}
 </style>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
@@ -206,7 +257,7 @@ input[type=range]{accent-color:var(--color-accent);width:100%}
     <p class="note"><span class="mark"></span>Phase 5 design system, draft</p>
     <h1>DARZ<br>SYSTEM</h1>
     <p class="lede">Marble, graphite and chalk. One variable typeface whose width is the material. Images seen through cuts.</p>
-    <nav class="toc" aria-label="Sections"><a href="#type">Type</a><a href="#colour">Colour</a><a href="#controls">Controls</a><a href="#nav">Navigation</a><a href="#signature">Signature</a><a href="#icons">Icons</a><a href="#layout">Layout &amp; motion</a></nav>
+    <nav class="toc" aria-label="Sections"><a href="#type">Type</a><a href="#colour">Colour</a><a href="#controls">Controls</a><a href="#nav">Navigation</a><a href="#signature">Signature</a><a href="#transitions">Transitions</a><a href="#icons">Icons</a><a href="#layout">Layout &amp; motion</a></nav>
   </header>
 
   <!-- TYPE -->
@@ -352,6 +403,83 @@ input[type=range]{accent-color:var(--color-accent);width:100%}
     </div>
   </section>
 
+  <!-- TRANSITIONS -->
+  <section class="sec" id="transitions" aria-labelledby="h-tx">
+    <div class="sec-head"><p class="note"><span class="mark"></span>Transitions</p><h2 id="h-tx">Nothing jumps. Everything is pulled, cut or assembled.</h2>
+      <p>Every switch uses one of three moves from the concept. Fabric is <b style="color:var(--color-text)">pulled</b> across the grain (sizes, tabs), cloth is <b style="color:var(--color-text)">cut on the bias</b> (colours), and pieces are <b style="color:var(--color-text)">assembled</b> through the cut (pages). Try each one.</p></div>
+    <div class="tx-grid">
+      <div class="tx-card">
+        <span class="n">Pull: size selector</span>
+        <h3>The selected piece is pulled to the new size</h3>
+        <div class="seg" id="seg" role="group" aria-label="Size">
+          <span class="ind" aria-hidden="true"></span>
+          <button type="button" aria-pressed="false">S</button><button type="button" aria-pressed="true">M</button><button type="button" aria-pressed="false">L</button><button type="button" aria-pressed="false">XL</button><button type="button" disabled aria-label="XXL, sold out">XXL</button>
+        </div>
+        <p class="tx-note">The graphite piece stretches toward the new size like cloth being pulled, then settles there (480 ms). The label colour follows a beat later. The arrow keys work too.</p>
+      </div>
+      <div class="tx-card">
+        <span class="n">Pull: product tabs</span>
+        <h3>A chalk line is drawn to the next tab</h3>
+        <div class="tabs" id="tabs" role="tablist" aria-label="Product details">
+          <button role="tab" type="button" aria-selected="true" aria-controls="tp1" id="tb1">Description</button>
+          <button role="tab" type="button" aria-selected="false" aria-controls="tp2" id="tb2" tabindex="-1">Material</button>
+          <button role="tab" type="button" aria-selected="false" aria-controls="tp3" id="tb3" tabindex="-1">Fit &amp; size</button>
+          <button role="tab" type="button" aria-selected="false" aria-controls="tp4" id="tb4" tabindex="-1">Delivery</button>
+          <span class="line" aria-hidden="true"></span>
+        </div>
+        <div class="panels">
+          <div role="tabpanel" id="tp1" aria-labelledby="tb1"><p>A band-collar kurta in handloom khaddar, cut straight on the grain so the side seams hang true.</p></div>
+          <div role="tabpanel" id="tp2" aria-labelledby="tb2" hidden><p>Khaddar, 180 GSM, 100% cotton. Slubbed yarns give a dry, textured hand that softens with washing.</p></div>
+          <div role="tabpanel" id="tp3" aria-labelledby="tb3" hidden><p>Regular fit. The model is 5'11" and wears M. Chest 42", length 41".</p></div>
+          <div role="tabpanel" id="tp4" aria-labelledby="tb4" hidden><p>2–4 working days nationwide. Cash on delivery. Exchange within 7 days.</p></div>
+        </div>
+      </div>
+      <div class="tx-card">
+        <span class="n">Bias cut: colour switch</span>
+        <h3>The new colourway is cut in on the bias</h3>
+        <div class="bias" id="bias"><div class="layer c1" style="z-index:1"></div><span class="seam" aria-hidden="true"></span><span class="label" id="biasLabel">Indigo</span></div>
+        <div class="swatches" id="biasSw" role="group" aria-label="Colour">
+          <button class="sw c1" type="button" aria-pressed="true" aria-label="Indigo" data-c="c1"></button>
+          <button class="sw c2" type="button" aria-pressed="false" aria-label="Walnut" data-c="c2"></button>
+          <button class="sw c3" type="button" aria-pressed="false" aria-label="Ash grey" data-c="c3"></button>
+          <button class="sw c4" type="button" aria-pressed="false" aria-label="Moss" data-c="c4"></button>
+        </div>
+        <p class="tx-note">A dashed seam sweeps across at 38°, the angle cloth is cut on the bias, and reveals the new colour behind it. In the store, this swaps the real product photo.</p>
+      </div>
+      <div class="tx-card">
+        <span class="n">Assemble: page to page</span>
+        <h3>Go through the cut</h3>
+        <div class="frame" id="frame">
+          <div class="chrome"><b>DARZ</b><nav aria-label="Demo pages"><button type="button" data-go="wall" aria-current="page">Exhibition</button><button type="button" data-go="studio">Studio</button></nav></div>
+          <div class="page" id="pg-wall">
+            <h4>THE COURTYARD</h4>
+            <div class="wallmini">
+              <button type="button" class="big c1" data-p="Band-collar kurta" data-price="Rs 8,450"><span>Band-collar kurta</span></button>
+              <button type="button" class="c2" data-p="Walnut waistcoat" data-price="Rs 6,900"><span>Waistcoat</span></button>
+              <button type="button" class="c3" data-p="Ash shalwar" data-price="Rs 3,200"><span>Shalwar</span></button>
+              <button type="button" class="c4" data-p="Moss overshirt" data-price="Rs 5,750"><span>Overshirt</span></button>
+              <button type="button" class="c5" data-p="Peshawari chappal" data-price="Rs 4,400"><span>Chappal</span></button>
+            </div>
+          </div>
+          <div class="page prod" id="pg-prod" hidden>
+            <div class="hero c1" id="prodHero"></div>
+            <div class="panel"><button type="button" class="back" id="back">Back to exhibition</button><h4 id="prodName">Band-collar kurta</h4><span class="p" id="prodPrice">Rs 8,450</span>
+              <div style="display:flex;gap:6px"><span style="border:1px solid var(--color-line-strong);padding:4px 10px;font-size:11px">S</span><span style="background:var(--color-text);color:var(--color-on-text);padding:4px 10px;font-size:11px">M</span><span style="border:1px solid var(--color-line-strong);padding:4px 10px;font-size:11px">L</span></div>
+              <span class="btn" style="min-height:34px;padding:8px 14px;font-size:12px">Add to bag</span></div>
+          </div>
+          <div class="page" id="pg-studio" hidden>
+            <h4>STYLE STUDIO</h4>
+            <div style="display:grid;grid-template-columns:1fr;justify-items:center;gap:6px;padding-top:4px">
+              <div class="c2" style="width:38%;height:40px"></div><div class="c1" style="width:44%;height:48px"></div><div class="c3" style="width:30%;height:44px"></div>
+            </div>
+          </div>
+          <span class="sweep" id="sweep" aria-hidden="true"></span>
+        </div>
+        <p class="tx-note">Tap a product: its image grows into the product page while the rest of the wall falls away. Tap the menu: the old page is cut away along a seam and the new one assembles. The real site uses the browser's View Transitions with this as the fallback.</p>
+      </div>
+    </div>
+  </section>
+
   <!-- ICONS -->
   <section class="sec" id="icons" aria-labelledby="h-ic">
     <div class="sec-head"><p class="note"><span class="mark"></span>Icons</p><h2 id="h-ic">Drawn with a tailor's pencil</h2>
@@ -407,6 +535,118 @@ input[type=range]{accent-color:var(--color-accent);width:100%}
 (function(){var r=document.getElementById('axis'),w=document.getElementById('axisWord'),o=document.getElementById('axisOut');
 r.addEventListener('input',function(){w.style.fontVariationSettings="'wdth' "+r.value;o.textContent=r.value;});
 document.querySelectorAll('.sizes .size:not(:disabled)').forEach(function(b){b.addEventListener('click',function(){document.querySelectorAll('.sizes .size').forEach(function(x){x.setAttribute('aria-pressed','false')});b.setAttribute('aria-pressed','true')})});
-document.querySelectorAll('.swatches .sw').forEach(function(b){b.addEventListener('click',function(){document.querySelectorAll('.swatches .sw').forEach(function(x){x.setAttribute('aria-pressed','false')});b.setAttribute('aria-pressed','true')})});
+document.querySelectorAll('#controls .swatches .sw').forEach(function(b){b.addEventListener('click',function(){document.querySelectorAll('#controls .swatches .sw').forEach(function(x){x.setAttribute('aria-pressed','false')});b.setAttribute('aria-pressed','true')})});
+})();
+/* ===== TRANSITIONS ===== */
+(function(){
+  var RM=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var EASE='cubic-bezier(.32,0,.12,1)', CUT='cubic-bezier(.2,.7,.2,1)';
+
+  /* Pull: segmented size selector. Stretch to cover old+new, then settle on new. */
+  var seg=document.getElementById('seg'), ind=seg.querySelector('.ind'), btns=[].slice.call(seg.querySelectorAll('button'));
+  function rectOf(b){return {x:b.offsetLeft,w:b.offsetWidth}}
+  function place(b){var r=rectOf(b);ind.style.transform='translateX('+r.x+'px)';ind.style.width=r.w+'px'}
+  var cur=btns.find(function(b){return b.getAttribute('aria-pressed')==='true'});
+  place(cur);
+  function selectSize(b){
+    if(b===cur||b.disabled)return;
+    var a=rectOf(cur), n=rectOf(b), lo=Math.min(a.x,n.x), hi=Math.max(a.x+a.w,n.x+n.w);
+    cur.setAttribute('aria-pressed','false');b.setAttribute('aria-pressed','true');
+    if(!RM&&ind.animate){
+      ind.animate([
+        {transform:'translateX('+a.x+'px)',width:a.w+'px'},
+        {transform:'translateX('+lo+'px)',width:(hi-lo)+'px',offset:.45},
+        {transform:'translateX('+n.x+'px)',width:n.w+'px'}
+      ],{duration:480,easing:EASE});
+    }
+    place(b);cur=b;
+  }
+  btns.forEach(function(b){b.addEventListener('click',function(){selectSize(b)})});
+  seg.addEventListener('keydown',function(e){
+    if(e.key!=='ArrowRight'&&e.key!=='ArrowLeft')return;
+    var en=btns.filter(function(b){return !b.disabled}),i=en.indexOf(cur)+(e.key==='ArrowRight'?1:-1);
+    if(en[i]){selectSize(en[i]);en[i].focus();e.preventDefault()}
+  });
+  window.addEventListener('resize',function(){place(cur)});
+
+  /* Pull: tabs. Line is drawn from old to new, panel content slides along the grain. */
+  var tabs=[].slice.call(document.querySelectorAll('#tabs [role=tab]')), line=document.querySelector('#tabs .line'), curT=tabs[0];
+  function placeLine(t){line.style.transform='translateX('+t.offsetLeft+'px)';line.style.width=t.offsetWidth+'px'}
+  placeLine(curT);
+  function selectTab(t){
+    if(t===curT)return;
+    var dir=tabs.indexOf(t)>tabs.indexOf(curT)?1:-1, a={x:curT.offsetLeft,w:curT.offsetWidth}, n={x:t.offsetLeft,w:t.offsetWidth};
+    var oldP=document.getElementById(curT.getAttribute('aria-controls')), newP=document.getElementById(t.getAttribute('aria-controls'));
+    curT.setAttribute('aria-selected','false');curT.tabIndex=-1;t.setAttribute('aria-selected','true');t.tabIndex=0;
+    if(!RM&&line.animate){
+      var lo=Math.min(a.x,n.x),hi=Math.max(a.x+a.w,n.x+n.w);
+      line.animate([{transform:'translateX('+a.x+'px)',width:a.w+'px'},{transform:'translateX('+lo+'px)',width:(hi-lo)+'px',offset:.5},{transform:'translateX('+n.x+'px)',width:n.w+'px'}],{duration:420,easing:EASE});
+      oldP.hidden=true;newP.hidden=false;
+      newP.animate([{opacity:0,transform:'translateX('+(24*dir)+'px)',clipPath:dir>0?'inset(0 0 0 30%)':'inset(0 30% 0 0)'},{opacity:1,transform:'none',clipPath:'inset(0 0 0 0)'}],{duration:420,easing:CUT});
+    } else {oldP.hidden=true;newP.hidden=false}
+    placeLine(t);curT=t;
+  }
+  tabs.forEach(function(t){t.addEventListener('click',function(){selectTab(t)})});
+  document.getElementById('tabs').addEventListener('keydown',function(e){
+    var i=tabs.indexOf(curT);if(e.key==='ArrowRight')i=(i+1)%tabs.length;else if(e.key==='ArrowLeft')i=(i-1+tabs.length)%tabs.length;else return;
+    selectTab(tabs[i]);tabs[i].focus();e.preventDefault();
+  });
+  window.addEventListener('resize',function(){placeLine(curT)});
+
+  /* Bias cut: colour switch. New layer revealed by a 38-degree diagonal wipe with a seam. */
+  var bias=document.getElementById('bias'), seam=bias.querySelector('.seam'), label=document.getElementById('biasLabel'), sws=[].slice.call(document.querySelectorAll('#biasSw .sw')), busy=false;
+  sws.forEach(function(s){s.addEventListener('click',function(){
+    if(s.getAttribute('aria-pressed')==='true'||busy)return;
+    sws.forEach(function(x){x.setAttribute('aria-pressed','false')});s.setAttribute('aria-pressed','true');
+    var top=bias.querySelector('.layer:last-of-type'), nl=document.createElement('div');
+    nl.className='layer '+s.dataset.c;nl.style.zIndex=2;bias.insertBefore(nl,seam);
+    label.textContent=s.getAttribute('aria-label');
+    if(RM||!nl.animate){top.remove();nl.style.zIndex=1;return}
+    busy=true;
+    var a=nl.animate([{clipPath:'polygon(0 0,0 0,-40% 100%,-40% 100%)'},{clipPath:'polygon(0 0,140% 0,100% 100%,-40% 100%)'}],{duration:560,easing:CUT});
+    seam.animate([{left:'-20%',opacity:0},{opacity:.9,offset:.15},{opacity:.9,offset:.85},{left:'110%',opacity:0}],{duration:560,easing:CUT});
+    a.onfinish=function(){top.remove();nl.style.zIndex=1;busy=false};
+  })});
+
+  /* Assemble: page transitions inside the demo frame. */
+  var frame=document.getElementById('frame'), pages={wall:document.getElementById('pg-wall'),prod:document.getElementById('pg-prod'),studio:document.getElementById('pg-studio')}, sweep=document.getElementById('sweep'), now='wall', moving=false;
+  var navBtns=[].slice.call(frame.querySelectorAll('[data-go]'));
+  function setNav(k){navBtns.forEach(function(b){b.toggleAttribute('aria-current',b.dataset.go===k);if(b.dataset.go===k)b.setAttribute('aria-current','page')})}
+  function rel(el){var f=frame.getBoundingClientRect(),r=el.getBoundingClientRect();return {x:r.left-f.left,y:r.top-f.top,w:r.width,h:r.height}}
+  function seamTo(k){
+    if(k===now||moving)return;
+    var from=pages[now],to=pages[k];setNav(k==='prod'?'wall':k);
+    if(RM||!from.animate){from.hidden=true;to.hidden=false;now=k;return}
+    moving=true;to.hidden=false;to.style.zIndex=2;from.style.zIndex=1;
+    var dur=620;
+    to.animate([{clipPath:'inset(0 0 0 100%)'},{clipPath:'inset(0 0 0 0)'}],{duration:dur,easing:CUT});
+    [].slice.call(to.children).forEach(function(c,i){c.animate([{transform:'translateX(28px)',opacity:0},{transform:'none',opacity:1}],{duration:dur,delay:120+i*70,easing:EASE,fill:'backwards'})});
+    from.animate([{transform:'none'},{transform:'translateX(-6%)'}],{duration:dur,easing:CUT});
+    sweep.animate([{left:'100%',opacity:1},{left:'0%',opacity:1,offset:.95},{left:'0%',opacity:0}],{duration:dur,easing:CUT});
+    setTimeout(function(){from.hidden=true;from.style.zIndex='';to.style.zIndex='';now=k;moving=false},dur+40);
+  }
+  navBtns.forEach(function(b){b.addEventListener('click',function(){seamTo(b.dataset.go)})});
+
+  /* Shared element: product cell aperture expands into the product hero. */
+  var hero=document.getElementById('prodHero');
+  [].slice.call(frame.querySelectorAll('.wallmini button')).forEach(function(cell){cell.addEventListener('click',function(){
+    if(moving)return;
+    var cls=[].slice.call(cell.classList).find(function(c){return /^c\d$/.test(c)});
+    hero.className='hero '+cls;document.getElementById('prodName').textContent=cell.dataset.p;document.getElementById('prodPrice').textContent=cell.dataset.price;
+    if(RM||!cell.animate){pages.wall.hidden=true;pages.prod.hidden=false;now='prod';return}
+    moving=true;var a=rel(cell);pages.prod.hidden=false;pages.prod.style.visibility='hidden';var b=rel(hero);
+    var g=document.createElement('div');g.className='ghost '+cls;g.style.cssText+='left:'+a.x+'px;top:'+a.y+'px;width:'+a.w+'px;height:'+a.h+'px';frame.appendChild(g);
+    var others=[].slice.call(pages.wall.querySelectorAll('h4,.wallmini button')).filter(function(x){return x!==cell});
+    others.forEach(function(o,i){o.animate([{opacity:1,transform:'none'},{opacity:0,transform:'translateY(10px)'}],{duration:260,delay:i*25,easing:CUT,fill:'forwards'})});
+    cell.style.visibility='hidden';
+    var anim=g.animate([{left:a.x+'px',top:a.y+'px',width:a.w+'px',height:a.h+'px',clipPath:'polygon(0 0,100% 0,100% 100%,0 100%)'},
+      {left:b.x+'px',top:b.y+'px',width:b.w+'px',height:b.h+'px',clipPath:'polygon(0 .2%,30% 0,40% 6%,60% 6%,70% 0,100% .2%,100% 100%,0 100%)'}],{duration:620,easing:EASE,fill:'forwards'});
+    anim.onfinish=function(){
+      pages.prod.style.visibility='';pages.wall.hidden=true;g.remove();cell.style.visibility='';others.forEach(function(o){o.getAnimations().forEach(function(x){x.cancel()})});
+      [].slice.call(pages.prod.querySelectorAll('.panel > *')).forEach(function(c,i){c.animate([{opacity:0,transform:'translateX(18px)'},{opacity:1,transform:'none'}],{duration:420,delay:i*60,easing:EASE,fill:'backwards'})});
+      now='prod';moving=false;
+    };
+  })});
+  document.getElementById('back').addEventListener('click',function(){seamTo('wall')});
 })();
 </script>

@@ -10,5 +10,5 @@ Built with the `full-dev` workflow. Project memory lives in [`docs/full-dev/`](d
 | 2. Concept | Approved (Cut Light, DARZ): [`02-concept.md`](docs/full-dev/02-concept.md) |
 | 3. Inspiration | Approved: [`03-inspiration.md`](docs/full-dev/03-inspiration.md) |
 | 4. Architecture | Approved: [`04-architecture.md`](docs/full-dev/04-architecture.md) + [`plan.md`](docs/full-dev/plan.md) |
-| 5. Design system | Draft: [`05-design-system.md`](docs/full-dev/05-design-system.md), [`tokens.css`](styles/tokens.css), [`preview`](design/design-system.html) |
+| 5. Design system | Approved: [`05-design-system.md`](docs/full-dev/05-design-system.md), [`tokens.css`](styles/tokens.css), [`preview`](design/design-system.html) |
 | 6–13 | Not started |
