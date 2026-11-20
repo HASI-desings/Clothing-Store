@@ -1,6 +1,6 @@
 # Architecture: DARZ
 
-_Status: **draft** (2026-11-20). Awaiting Phase 4 approval._ · Build type: **e-commerce + admin web app** (hybrid).
+_Status: **approved** (2026-11-20). Studio uses illustrated flat-lays for the demo._ · Build type: **e-commerce + admin web app** (hybrid).
 
 ## Objectives
 | Objective | Measure |

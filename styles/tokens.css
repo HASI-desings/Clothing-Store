@@ -1,0 +1,126 @@
+/* DARZ design tokens: "Cut Light" (tailor's pattern × jali).
+   Single source of truth. Components never hard-code colours, sizes or durations.
+   Brand colours (--brand-*) can be overridden at runtime from Atelier → Settings. */
+
+:root {
+  /* ---------- Colour: light ("Marble") ---------- */
+  --color-bg:            #ECECE7; /* Marble: page ground */
+  --color-surface:       #F6F6F2; /* Paper: raised sheets, panels, menus */
+  --color-surface-sunk:  #E1E1DA; /* Stone: wells, hover fills, skeletons */
+  --color-text:          #1C2026; /* Graphite: primary ink (13.8:1 on bg) */
+  --color-text-2:        #4A4F57; /* Secondary ink (7.0:1) */
+  --color-text-muted:    #5D625A; /* Captions, meta (5.3:1; 4.8:1 on stone) */
+  --color-line:          #D3D3CC; /* Decorative hairlines only */
+  --color-line-strong:   #7A7C74; /* Control borders: inputs, swatches (3.6:1) */
+  --color-accent:        #2E49B8; /* Chalk blue: the tailor's mark. Links, notches, focus, selection (6.4:1) */
+  --color-accent-ink:    #1F3591; /* Accent hover/pressed (9.0:1) */
+  --color-accent-wash:   #DCE2F7; /* Selected backgrounds */
+  --color-on-accent:     #FFFFFF; /* Text on accent (7.6:1) */
+  --color-on-text:       #F6F6F2; /* Text on graphite buttons (15.1:1) */
+  --color-lattice:       #9A9C95; /* Stone shadow: lattice light layer, never text */
+  --color-sand:          #B4674B; /* Sandstone: inside photography and room lighting only, never UI paint */
+  --color-success:       #2F6B3E; /* In stock, order placed (5.4:1) */
+  --color-warn:          #7F5300; /* Low stock, attention (5.6:1) */
+  --color-error:         #A3322A; /* Validation, failed actions (5.8:1) */
+  --color-focus:         var(--color-accent);
+  --color-scrim:         rgb(28 32 38 / 0.48);
+
+  /* Fabric placeholder (used when an image is missing) */
+  --fabric-1: #2A3140; --fabric-2: #323B4D; --fabric-3: #1F2531;
+
+  /* ---------- Typography ---------- */
+  --font-sans:  "Archivo", "Arial Narrow", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-notation: "Martian Mono", ui-monospace, "SFMono-Regular", Menlo, monospace; /* pattern notation ONLY */
+
+  /* Width axis = the brand's material: condensed for structure, normal for reading */
+  --wdth-structure: 62;  --wdth-heading: 72;  --wdth-sub: 85;  --wdth-text: 100;  --wdth-wide: 112;
+
+  --fs-display: clamp(4.5rem, 2.2rem + 11vw, 13.75rem); /* 72 → 220 */
+  --fs-h1:      clamp(2.75rem, 1.6rem + 5vw, 5.5rem);   /* 44 → 88 */
+  --fs-h2:      clamp(2rem, 1.4rem + 2.8vw, 3.5rem);    /* 32 → 56 */
+  --fs-h3:      clamp(1.375rem, 1.15rem + 1vw, 1.875rem); /* 22 → 30 */
+  --fs-h4:      1.125rem;                                /* 18 */
+  --fs-lede:    clamp(1.1875rem, 1rem + 0.9vw, 1.625rem);/* 19 → 26 */
+  --fs-body:    1rem;      /* 16 */
+  --fs-body-lg: 1.125rem;  /* 18: product descriptions */
+  --fs-ui:      0.875rem;  /* 14: buttons, nav, filters */
+  --fs-small:   0.8125rem; /* 13: captions, legal */
+  --fs-notation:0.6875rem; /* 11: pattern notation */
+  --fs-price:   1.25rem;   /* 20 */
+
+  --lh-display: 0.84; --lh-heading: 0.95; --lh-sub: 1.15; --lh-body: 1.6; --lh-ui: 1.3;
+  --track-display: -0.02em; --track-heading: -0.01em; --track-notation: 0.04em; --track-ui: 0.01em;
+  --measure: 62ch;
+
+  /* ---------- Space: 4-based ---------- */
+  --sp-1: 4px;  --sp-2: 8px;  --sp-3: 12px; --sp-4: 16px; --sp-5: 24px; --sp-6: 32px;
+  --sp-7: 48px; --sp-8: 64px; --sp-9: 96px; --sp-10: 128px; --sp-11: 160px;
+  --section-gap: clamp(64px, 6vw + 32px, 160px);
+
+  /* ---------- Layout: the jali module ---------- */
+  --container: 1440px;
+  --content: 1280px;
+  --gutter: max(16px, env(safe-area-inset-left, 0px));
+  --cols: 4;  --col-gap: 16px;       /* mobile */
+  --cell-ratio: 4 / 5;               /* default product aperture */
+
+  /* ---------- Edges: radius, borders, shadow ---------- */
+  --radius-0: 0;      /* apertures, sheets, buttons: cut paper has square corners */
+  --radius-1: 2px;    /* inputs, swatches */
+  --radius-round: 999px; /* only for the bag count dot and colour dots */
+  --border-hair: 1px solid var(--color-line);
+  --border-control: 1px solid var(--color-line-strong);
+  --border-cut: 1px dashed var(--color-accent);   /* the cut-line: editable / droppable / compare seam */
+  --shadow-cast: 10px 14px 28px -12px rgb(28 32 38 / 0.35); /* raking-light cast: Studio pieces being dragged ONLY */
+  --grain-opacity: 0.035;
+
+  /* ---------- Signature: the notch ---------- */
+  --notch-w: 14px; --notch-h: 9px;
+
+  /* ---------- Motion ---------- */
+  --ease-cut:      cubic-bezier(0.2, 0.7, 0.2, 1);  /* apertures opening, sheets */
+  --ease-assemble: cubic-bezier(0.32, 0, 0.12, 1);  /* pieces sliding to a notch */
+  --ease-exit:     cubic-bezier(0.4, 0, 1, 1);
+  --dur-micro: 120ms; --dur-ui: 240ms; --dur-assemble: 480ms; --dur-reveal: 700ms;
+  --dur-drift: 26s;  /* lattice light */
+
+  /* ---------- Layers ---------- */
+  --z-bar: 50; --z-sheet: 80; --z-toast: 90;
+
+  color-scheme: light;
+}
+
+@media (min-width: 768px)  { :root { --cols: 8;  --col-gap: 20px; --gutter: max(32px, env(safe-area-inset-left, 0px)); } }
+@media (min-width: 1200px) { :root { --cols: 12; --col-gap: 24px; --gutter: max(48px, env(safe-area-inset-left, 0px)); } }
+
+/* ---------- Colour: dark ("Night courtyard"), designed, not inverted ---------- */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --color-bg: #16191E; --color-surface: #1E2229; --color-surface-sunk: #262B33;
+    --color-text: #E6E6E0; --color-text-2: #A9ADB4; --color-text-muted: #9297A0;
+    --color-line: #30353D; --color-line-strong: #737A84;
+    --color-accent: #8EA2F0; --color-accent-ink: #B3C1F6; --color-accent-wash: #26304F;
+    --color-on-accent: #16191E; --color-on-text: #16191E;
+    --color-lattice: #5C6068; --color-sand: #C98466;
+    --color-success: #7BC48D; --color-warn: #E0B25A; --color-error: #F08A80;
+    --color-scrim: rgb(0 0 0 / 0.6);
+    --shadow-cast: 10px 14px 28px -12px rgb(0 0 0 / 0.6);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --color-bg: #16191E; --color-surface: #1E2229; --color-surface-sunk: #262B33;
+  --color-text: #E6E6E0; --color-text-2: #A9ADB4; --color-text-muted: #9297A0;
+  --color-line: #30353D; --color-line-strong: #737A84;
+  --color-accent: #8EA2F0; --color-accent-ink: #B3C1F6; --color-accent-wash: #26304F;
+  --color-on-accent: #16191E; --color-on-text: #16191E;
+  --color-lattice: #5C6068; --color-sand: #C98466;
+  --color-success: #7BC48D; --color-warn: #E0B25A; --color-error: #F08A80;
+  --color-scrim: rgb(0 0 0 / 0.6);
+  --shadow-cast: 10px 14px 28px -12px rgb(0 0 0 / 0.6);
+  color-scheme: dark;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root { --dur-micro: 0ms; --dur-ui: 0ms; --dur-assemble: 0ms; --dur-reveal: 0ms; }
+}

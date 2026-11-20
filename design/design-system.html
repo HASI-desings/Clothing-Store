@@ -1,0 +1,412 @@
+<title>DARZ Design System</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,300..900&family=Martian+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: the jali module, 12/8/4 columns. Tokens mirror styles/tokens.css (inlined because artifacts can't load local CSS). */
+:root{
+  --color-bg:#ECECE7;--color-surface:#F6F6F2;--color-surface-sunk:#E1E1DA;--color-text:#1C2026;--color-text-2:#4A4F57;--color-text-muted:#5D625A;
+  --color-line:#D3D3CC;--color-line-strong:#7A7C74;--color-accent:#2E49B8;--color-accent-ink:#1F3591;--color-accent-wash:#DCE2F7;--color-on-accent:#FFFFFF;--color-on-text:#F6F6F2;
+  --color-lattice:#9A9C95;--color-sand:#B4674B;--color-success:#2F6B3E;--color-warn:#7F5300;--color-error:#A3322A;
+  --fabric-1:#2A3140;--fabric-2:#323B4D;--fabric-3:#1F2531;
+  --font-sans:"Archivo","Arial Narrow",system-ui,-apple-system,"Segoe UI",sans-serif;--font-notation:"Martian Mono",ui-monospace,Menlo,monospace;
+  --fs-display:clamp(4.5rem,2.2rem + 11vw,13.75rem);--fs-h1:clamp(2.75rem,1.6rem + 5vw,5.5rem);--fs-h2:clamp(2rem,1.4rem + 2.8vw,3.5rem);--fs-h3:clamp(1.375rem,1.15rem + 1vw,1.875rem);
+  --fs-lede:clamp(1.1875rem,1rem + .9vw,1.625rem);--fs-ui:.875rem;--fs-small:.8125rem;--fs-notation:.6875rem;
+  --sp-2:8px;--sp-3:12px;--sp-4:16px;--sp-5:24px;--sp-6:32px;--sp-7:48px;--sp-8:64px;--sp-9:96px;
+  --ease-cut:cubic-bezier(.2,.7,.2,1);--ease-assemble:cubic-bezier(.32,0,.12,1);--dur-micro:120ms;--dur-ui:240ms;--dur-assemble:480ms;
+  --shadow-cast:10px 14px 28px -12px rgb(28 32 38 / .35);
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --color-bg:#16191E;--color-surface:#1E2229;--color-surface-sunk:#262B33;--color-text:#E6E6E0;--color-text-2:#A9ADB4;--color-text-muted:#9297A0;--color-line:#30353D;--color-line-strong:#737A84;
+  --color-accent:#8EA2F0;--color-accent-ink:#B3C1F6;--color-accent-wash:#26304F;--color-on-accent:#16191E;--color-on-text:#16191E;--color-lattice:#5C6068;--color-sand:#C98466;
+  --color-success:#7BC48D;--color-warn:#E0B25A;--color-error:#F08A80;--shadow-cast:10px 14px 28px -12px rgb(0 0 0 / .6);color-scheme:dark}}
+:root[data-theme="dark"]{
+  --color-bg:#16191E;--color-surface:#1E2229;--color-surface-sunk:#262B33;--color-text:#E6E6E0;--color-text-2:#A9ADB4;--color-text-muted:#9297A0;--color-line:#30353D;--color-line-strong:#737A84;
+  --color-accent:#8EA2F0;--color-accent-ink:#B3C1F6;--color-accent-wash:#26304F;--color-on-accent:#16191E;--color-on-text:#16191E;--color-lattice:#5C6068;--color-sand:#C98466;
+  --color-success:#7BC48D;--color-warn:#E0B25A;--color-error:#F08A80;--shadow-cast:10px 14px 28px -12px rgb(0 0 0 / .6);color-scheme:dark}
+@media (prefers-reduced-motion:reduce){:root{--dur-micro:0ms;--dur-ui:0ms;--dur-assemble:0ms}}
+
+*{box-sizing:border-box}
+body{background:var(--color-bg);color:var(--color-text);font-family:var(--font-sans);font-size:16px;line-height:1.6;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.wrap{max-width:1280px;margin:0 auto;padding-block:clamp(24px,5vw,64px);display:grid;gap:clamp(64px,8vw,120px)}
+h1,h2,h3,h4{margin:0;font-family:var(--font-sans);text-wrap:balance}
+p{margin:0;max-width:62ch;color:var(--color-text-2)}
+.note,.n{font-family:var(--font-notation);font-size:var(--fs-notation);letter-spacing:.04em;text-transform:uppercase}
+.note{color:var(--color-accent)}
+.n{color:var(--color-text-muted)}
+.mark{display:inline-block;width:0;height:0;border-left:7px solid transparent;border-right:7px solid transparent;border-top:9px solid var(--color-accent);margin-right:10px;transform:translateY(-1px)}
+.sec{display:grid;gap:var(--sp-6)}
+.sec-head{display:grid;gap:var(--sp-3);max-width:780px}
+.sec-head h2{font-size:var(--fs-h2);font-weight:800;font-variation-settings:"wdth" 68;line-height:.95;letter-spacing:-.01em}
+.sheet{background:var(--color-surface);border:1px solid var(--color-line);padding:clamp(18px,3vw,32px)}
+.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--sp-5)}
+.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--sp-5)}
+a{color:var(--color-accent);text-underline-offset:3px}
+:focus-visible{outline:2px solid var(--color-accent);outline-offset:3px}
+
+/* HEADER */
+.top{display:grid;gap:var(--sp-5)}
+.top h1{font-size:var(--fs-display);font-weight:900;font-variation-settings:"wdth" 62;letter-spacing:-.02em;line-height:.84}
+.top .lede{font-size:var(--fs-lede);color:var(--color-text);line-height:1.3;font-variation-settings:"wdth" 90;max-width:36ch}
+.toc{display:flex;flex-wrap:wrap;gap:var(--sp-2) var(--sp-5);font-size:var(--fs-ui)}
+
+/* TYPE */
+.scale{display:grid;gap:0;border-top:1px solid var(--color-line)}
+.row{display:grid;grid-template-columns:180px minmax(0,1fr);gap:var(--sp-5);align-items:baseline;padding-block:var(--sp-5);border-bottom:1px dashed var(--color-line)}
+.row .spec{display:grid;gap:2px}
+.t-display{font-size:clamp(3.5rem,2rem + 7vw,8rem);font-weight:900;font-variation-settings:"wdth" 62;line-height:.84;letter-spacing:-.02em}
+.t-h1{font-size:var(--fs-h1);font-weight:800;font-variation-settings:"wdth" 68;line-height:.95;letter-spacing:-.01em}
+.t-h2{font-size:var(--fs-h2);font-weight:750;font-variation-settings:"wdth" 75;line-height:.95}
+.t-h3{font-size:var(--fs-h3);font-weight:700;font-variation-settings:"wdth" 85;line-height:1.15}
+.t-lede{font-size:var(--fs-lede);font-weight:450;font-variation-settings:"wdth" 92;line-height:1.3;color:var(--color-text)}
+.t-body{font-size:1rem;max-width:62ch;color:var(--color-text)}
+.t-ui{font-size:var(--fs-ui);font-weight:550;letter-spacing:.01em}
+.t-price{font-size:1.25rem;font-weight:650;font-variant-numeric:tabular-nums;font-variation-settings:"wdth" 90}
+.t-not{font-family:var(--font-notation);font-size:var(--fs-notation);letter-spacing:.04em;text-transform:uppercase;line-height:1.9}
+.axis{display:grid;gap:var(--sp-3)}
+.axis output{font-family:var(--font-notation);font-size:var(--fs-notation)}
+input[type=range]{accent-color:var(--color-accent);width:100%}
+#axisWord{font-size:clamp(48px,9vw,112px);font-weight:850;line-height:.9;transition:font-variation-settings var(--dur-ui) var(--ease-cut)}
+
+/* COLOUR */
+.pal{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,200px),1fr));gap:var(--sp-4)}
+.chip{border:1px solid var(--color-line);background:var(--color-surface);display:grid}
+.chip i{display:block;height:72px;border-bottom:1px solid var(--color-line)}
+.chip div{padding:10px 12px;display:grid;gap:2px}
+.chip b{font-size:15px;font-variation-settings:"wdth" 85}
+.chip small{font-size:12.5px;color:var(--color-text-2);line-height:1.35}
+.chip .n{font-size:10px}
+
+/* BUTTONS: the notch is cut into the top edge */
+.btn{--notch:polygon(0 0,calc(50% - 7px) 0,50% 9px,calc(50% + 7px) 0,100% 0,100% 100%,0 100%);
+  appearance:none;border:0;font:inherit;font-size:var(--fs-ui);font-weight:600;letter-spacing:.01em;font-variation-settings:"wdth" 95;
+  min-height:48px;padding:14px 28px 13px;display:inline-flex;align-items:center;justify-content:center;gap:10px;cursor:pointer;
+  background:var(--color-text);color:var(--color-on-text);clip-path:var(--notch);
+  transition:background-color var(--dur-ui) var(--ease-cut),transform var(--dur-micro) var(--ease-cut)}
+.btn:hover,.btn.is-hover{background:var(--color-accent);color:var(--color-on-accent)}
+.btn:active,.btn.is-active{transform:translateY(1px);background:var(--color-accent-ink)}
+.btn.is-focus{outline:2px solid var(--color-accent);outline-offset:3px}
+.btn:disabled{background:var(--color-surface-sunk);color:var(--color-text-muted);clip-path:none;cursor:not-allowed}
+.btn.is-loading{position:relative;cursor:progress}
+.btn.is-loading::after{content:"";position:absolute;left:12px;right:12px;bottom:8px;height:1px;
+  background:repeating-linear-gradient(90deg,currentColor 0 6px,transparent 6px 11px);background-size:22px 1px;animation:cut 0.9s linear infinite}
+@keyframes cut{to{background-position:22px 0}}
+.btn-2{appearance:none;font:inherit;font-size:var(--fs-ui);font-weight:600;min-height:48px;padding:13px 26px;background:transparent;color:var(--color-text);
+  border:1px solid var(--color-text);cursor:pointer;transition:background-color var(--dur-ui) var(--ease-cut)}
+.btn-2:hover{background:var(--color-surface-sunk)}
+.btn-3{font-size:var(--fs-ui);font-weight:600;color:var(--color-accent);text-decoration:underline;text-decoration-style:dashed;text-underline-offset:5px}
+.btn-3:hover{text-decoration-style:solid}
+.states{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:var(--sp-5) var(--sp-4);align-items:end}
+.state{display:grid;gap:8px;justify-items:start}
+@media (prefers-reduced-motion:reduce){.btn.is-loading::after{animation:none}}
+
+/* FORM */
+.field{display:grid;gap:6px}
+.field label{font-size:var(--fs-ui);font-weight:600}
+.field input{font:inherit;font-size:16px;min-height:48px;padding:12px 14px;border:1px solid var(--color-line-strong);border-radius:2px;background:var(--color-surface);color:var(--color-text);width:100%}
+.field input:focus{outline:none;border:1px dashed var(--color-accent);box-shadow:0 0 0 3px var(--color-accent-wash)}
+.field .help{font-size:var(--fs-small);color:var(--color-text-muted)}
+.field.err input{border-color:var(--color-error)}
+.field.err .help{color:var(--color-error)}
+.sizes{display:flex;flex-wrap:wrap;gap:8px}
+.size{appearance:none;font:inherit;font-size:var(--fs-ui);font-weight:600;min-width:52px;min-height:48px;border:1px solid var(--color-line-strong);border-radius:2px;background:var(--color-surface);color:var(--color-text);cursor:pointer;position:relative}
+.size[aria-pressed="true"]{background:var(--color-text);color:var(--color-on-text);border-color:var(--color-text)}
+.size[aria-pressed="true"]::before{content:"";position:absolute;top:-1px;left:50%;transform:translateX(-50%);border-left:6px solid transparent;border-right:6px solid transparent;border-top:7px solid var(--color-accent)}
+.size:disabled{color:var(--color-text-muted);background:repeating-linear-gradient(-45deg,transparent 0 6px,var(--color-surface-sunk) 6px 7px);cursor:not-allowed;text-decoration:line-through}
+.swatches{display:flex;gap:10px}
+.sw{width:44px;height:44px;border-radius:2px;border:1px solid var(--color-line-strong);cursor:pointer;padding:0;position:relative}
+.sw[aria-pressed="true"]{outline:1px dashed var(--color-accent);outline-offset:4px}
+.stock{font-size:var(--fs-small);display:flex;align-items:center;gap:8px}
+.dot{width:8px;height:8px;border-radius:999px;display:inline-block}
+
+/* NAV */
+.bar{display:flex;align-items:center;justify-content:space-between;gap:var(--sp-4);padding:14px clamp(16px,3vw,32px);background:var(--color-bg);border-bottom:1px solid var(--color-line)}
+.brand{font-weight:900;font-variation-settings:"wdth" 62;font-size:28px;letter-spacing:-.01em;line-height:1;color:var(--color-text);text-decoration:none}
+.bar nav{display:flex;align-items:center;gap:clamp(12px,2vw,28px);font-size:var(--fs-ui);font-weight:550}
+.bar nav a{color:var(--color-text);text-decoration:none}
+.iconbtn{appearance:none;background:none;border:0;color:var(--color-text);width:44px;height:44px;display:grid;place-items:center;cursor:pointer;position:relative}
+.count{position:absolute;top:6px;right:4px;min-width:16px;height:16px;border-radius:999px;background:var(--color-accent);color:var(--color-on-accent);font-size:10px;font-weight:700;display:grid;place-items:center;padding:0 4px}
+.patternsheet{background:var(--color-surface);border:1px solid var(--color-line);padding:var(--sp-5);display:grid;grid-template-columns:repeat(6,minmax(0,1fr));grid-auto-rows:64px;gap:10px}
+.piece{border:1px solid var(--color-text);display:flex;flex-direction:column;justify-content:space-between;padding:10px 12px;text-decoration:none;color:var(--color-text);position:relative;transition:background-color var(--dur-ui) var(--ease-cut)}
+.piece:hover{background:var(--color-accent-wash)}
+.piece b{font-weight:800;font-variation-settings:"wdth" 70;font-size:20px;line-height:1}
+.piece::after{content:"";position:absolute;inset:5px;border:1px dashed var(--color-line-strong);pointer-events:none}
+.p1{grid-column:span 3;grid-row:span 3}.p2{grid-column:span 3;grid-row:span 2}.p3{grid-column:span 2}.p4{grid-column:span 1}
+.p5{grid-column:span 2;grid-row:span 1}.p6{grid-column:span 2}.p7{grid-column:span 2}
+
+/* APERTURES */
+.aps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:var(--sp-5)}
+.ap{display:grid;gap:10px}
+.ap svg{width:100%;height:auto;display:block}
+.fabric{fill:url(#twill)}
+.cell{position:relative;display:grid;gap:10px}
+.cell .img{aspect-ratio:4/5;max-width:100%;background:repeating-linear-gradient(-38deg,var(--fabric-1) 0 3px,var(--fabric-2) 3px 6px,var(--fabric-3) 6px 7px);
+  clip-path:polygon(0 0,100% 0,100% 100%,calc(50% + 8px) 100%,50% calc(100% - 10px),calc(50% - 8px) 100%,0 100%);transition:clip-path var(--dur-assemble) var(--ease-cut)}
+.cell:hover .img{clip-path:polygon(0 0,100% 0,100% 100%,calc(50% + 14px) 100%,50% calc(100% - 16px),calc(50% - 14px) 100%,0 100%)}
+.cell .meta{display:flex;justify-content:space-between;gap:8px;align-items:baseline}
+.cell .meta b{font-weight:650;font-size:15px;font-variation-settings:"wdth" 88}
+.cell .avail{font-size:var(--fs-small);color:var(--color-text-muted)}
+
+/* LATTICE */
+.lattice{position:relative;aspect-ratio:16/7;max-width:100%;background:var(--color-surface-sunk);overflow:hidden;border:1px solid var(--color-line)}
+.lattice svg{position:absolute;inset:-10%;width:120%;height:120%;opacity:.55;animation:drift 26s linear infinite}
+.lattice .over{position:absolute;left:clamp(16px,4vw,48px);bottom:clamp(16px,4vw,40px);display:grid;gap:6px}
+.lattice .over b{font-size:clamp(36px,6vw,72px);font-weight:900;font-variation-settings:"wdth" 62;line-height:.85;color:var(--color-text)}
+@keyframes drift{to{transform:translate(-56px,-28px)}}
+@media (prefers-reduced-motion:reduce){.lattice svg{animation:none}}
+
+/* NOTATION */
+.notation{border:1px dashed var(--color-accent);padding:var(--sp-4) var(--sp-5);display:grid;grid-template-columns:auto 1fr;gap:4px var(--sp-5)}
+.notation dt{font-family:var(--font-notation);font-size:var(--fs-notation);letter-spacing:.04em;text-transform:uppercase;color:var(--color-text-muted);padding-top:3px}
+.notation dd{margin:0;font-size:15px;color:var(--color-text)}
+.notation dd small{display:block;color:var(--color-text-muted);font-size:var(--fs-small)}
+
+/* ICONS */
+.icons{display:grid;grid-template-columns:repeat(auto-fill,minmax(96px,1fr));gap:var(--sp-4)}
+.ic{display:grid;justify-items:center;gap:8px;padding:var(--sp-4) 0;border:1px solid var(--color-line);background:var(--color-surface)}
+.ic svg{width:24px;height:24px;stroke:var(--color-text);fill:none;stroke-width:1.5;stroke-linecap:square;stroke-linejoin:miter}
+.ic span{font-family:var(--font-notation);font-size:10px;color:var(--color-text-muted)}
+
+/* TOAST + STUDIO PIECE */
+.toast{display:flex;align-items:center;gap:12px;padding:14px 18px;background:var(--color-text);color:var(--color-on-text);font-size:var(--fs-ui);max-width:420px;clip-path:polygon(0 0,24px 0,31px 8px,38px 0,100% 0,100% 100%,0 100%)}
+.piece-drag{width:140px;height:120px;background:repeating-linear-gradient(-38deg,var(--fabric-1) 0 3px,var(--fabric-2) 3px 6px,var(--fabric-3) 6px 7px);box-shadow:var(--shadow-cast);transform:rotate(-2deg)}
+
+.rules{display:grid;gap:10px;padding-left:18px;margin:0;color:var(--color-text-2)}
+.rules b{color:var(--color-text)}
+.do{border-top:2px solid var(--color-success);padding-top:12px;display:grid;gap:8px}
+.dont{border-top:2px solid var(--color-error);padding-top:12px;display:grid;gap:8px}
+
+@media (max-width:900px){.grid3{grid-template-columns:minmax(0,1fr)}.aps{grid-template-columns:repeat(2,minmax(0,1fr))}.patternsheet{grid-template-columns:repeat(2,minmax(0,1fr));grid-auto-rows:56px}.p1,.p2,.p3,.p4,.p5,.p6,.p7{grid-column:span 1;grid-row:span 1}.p1{grid-column:span 2;grid-row:span 2}}
+@media (max-width:700px){.grid2{grid-template-columns:minmax(0,1fr)}.row{grid-template-columns:minmax(0,1fr);gap:6px}.bar nav .hide-sm{display:none}}
+</style>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <pattern id="twill" width="7" height="7" patternUnits="userSpaceOnUse" patternTransform="rotate(-38)">
+      <rect width="7" height="7" style="fill:var(--fabric-1)"/><rect width="7" height="3" style="fill:var(--fabric-2)"/><rect y="6" width="7" height="1" style="fill:var(--fabric-3)"/>
+    </pattern>
+    <symbol id="star" viewBox="-20 -20 40 40"><rect x="-9" y="-9" width="18" height="18"/><rect x="-9" y="-9" width="18" height="18" transform="rotate(45)"/></symbol>
+    <pattern id="jali" width="40" height="40" patternUnits="userSpaceOnUse">
+      <use href="#star" width="40" height="40" style="fill:var(--color-surface)"/>
+      <use href="#star" x="-20" y="-20" width="40" height="40" style="fill:var(--color-surface)"/><use href="#star" x="20" y="-20" width="40" height="40" style="fill:var(--color-surface)"/>
+      <use href="#star" x="-20" y="20" width="40" height="40" style="fill:var(--color-surface)"/><use href="#star" x="20" y="20" width="40" height="40" style="fill:var(--color-surface)"/>
+    </pattern>
+    <filter id="soft"><feGaussianBlur stdDeviation="1.6"/></filter>
+    <clipPath id="ap-front" clipPathUnits="objectBoundingBox"><path d="M0 .2 Q.26 .19 .3 0 L.84 .07 Q.74 .26 1 .38 L.97 1 L0 1 Z"/></clipPath>
+    <clipPath id="ap-sleeve" clipPathUnits="objectBoundingBox"><path d="M0 .26 Q.5 -.06 1 .26 L.86 1 L.14 1 Z"/></clipPath>
+    <clipPath id="ap-yoke" clipPathUnits="objectBoundingBox"><path d="M0 0 H1 V.72 Q.5 1 0 .72 Z"/></clipPath>
+    <clipPath id="ap-arch" clipPathUnits="objectBoundingBox"><path d="M0 1 V.36 Q0 0 .5 0 Q1 0 1 .36 V1 Z"/></clipPath>
+  </defs>
+</svg>
+
+<main class="wrap">
+  <header class="top">
+    <p class="note"><span class="mark"></span>Phase 5 design system, draft</p>
+    <h1>DARZ<br>SYSTEM</h1>
+    <p class="lede">Marble, graphite and chalk. One variable typeface whose width is the material. Images seen through cuts.</p>
+    <nav class="toc" aria-label="Sections"><a href="#type">Type</a><a href="#colour">Colour</a><a href="#controls">Controls</a><a href="#nav">Navigation</a><a href="#signature">Signature</a><a href="#icons">Icons</a><a href="#layout">Layout &amp; motion</a></nav>
+  </header>
+
+  <!-- TYPE -->
+  <section class="sec" id="type" aria-labelledby="h-type">
+    <div class="sec-head"><p class="note"><span class="mark"></span>Typography</p><h2 id="h-type">One family, built by width</h2>
+      <p>Archivo (Google Fonts, SIL Open Font License) does all the work. Narrow and heavy reads as structure; normal width is for reading. Martian Mono (OFL) is used only for pattern notation.</p></div>
+    <div class="scale">
+      <div class="row"><div class="spec"><span class="n">Display</span><span class="n">900 / wdth 62 / 72–220</span></div><div class="t-display">DARZ</div></div>
+      <div class="row"><div class="spec"><span class="n">H1</span><span class="n">800 / wdth 68 / 44–88</span></div><div class="t-h1">The Courtyard Edit</div></div>
+      <div class="row"><div class="spec"><span class="n">H2</span><span class="n">750 / wdth 75 / 32–56</span></div><div class="t-h2">Khaddar, cut for winter</div></div>
+      <div class="row"><div class="spec"><span class="n">H3</span><span class="n">700 / wdth 85 / 22–30</span></div><div class="t-h3">Band-collar kurta in ash grey</div></div>
+      <div class="row"><div class="spec"><span class="n">Lede</span><span class="n">450 / wdth 92 / 19–26</span></div><div class="t-lede">Style isn't something you put on. It's something you construct.</div></div>
+      <div class="row"><div class="spec"><span class="n">Body</span><span class="n">400 / wdth 100 / 16, 1.6</span></div><p class="t-body">A slubbed handloom khaddar with a dry hand and real weight. It holds a crisp band collar and softens with every wash. Cut straight on the grain, so the side seams hang true.</p></div>
+      <div class="row"><div class="spec"><span class="n">UI</span><span class="n">550 / 14</span></div><div class="t-ui">Add to bag &nbsp; Size guide &nbsp; Filters (3)</div></div>
+      <div class="row"><div class="spec"><span class="n">Price</span><span class="n">650 / tabular</span></div><div class="t-price">Rs 8,450</div></div>
+      <div class="row"><div class="spec"><span class="n">Notation</span><span class="n">Martian Mono 500 / 11</span></div><div class="t-not">Khaddar / 180 GSM<br>Grain: warp / Cut 1 on fold</div></div>
+    </div>
+    <div class="sheet axis">
+      <div id="axisWord" style="font-variation-settings:'wdth' 62">Constructed</div>
+      <label class="n" for="axis">Width axis <output id="axisOut" for="axis">62</output></label>
+      <input id="axis" type="range" min="62" max="125" value="62">
+      <p>Width tokens: structure 62, heading 72, sub 85, text 100, wide 112. Headlines ease from 62 toward 72 as they enter view. That's the only place type moves.</p>
+    </div>
+  </section>
+
+  <!-- COLOUR -->
+  <section class="sec" id="colour" aria-labelledby="h-col">
+    <div class="sec-head"><p class="note"><span class="mark"></span>Colour</p><h2 id="h-col">Every colour has one job</h2>
+      <p>Contrast is measured against the Marble ground in light mode. Dark mode ("night courtyard") is designed separately: switch your system theme to see it.</p></div>
+    <div class="pal">
+      <div class="chip"><i style="background:var(--color-bg)"></i><div><b>Marble</b><small>Page ground</small><span class="n">--color-bg</span></div></div>
+      <div class="chip"><i style="background:var(--color-surface)"></i><div><b>Paper</b><small>Sheets, panels, menus</small><span class="n">--color-surface</span></div></div>
+      <div class="chip"><i style="background:var(--color-surface-sunk)"></i><div><b>Stone</b><small>Wells, hover fills, skeletons</small><span class="n">--color-surface-sunk</span></div></div>
+      <div class="chip"><i style="background:var(--color-text)"></i><div><b>Graphite</b><small>Primary ink and buttons. 13.8:1</small><span class="n">--color-text</span></div></div>
+      <div class="chip"><i style="background:var(--color-text-2)"></i><div><b>Graphite 2</b><small>Secondary text. 7.0:1</small><span class="n">--color-text-2</span></div></div>
+      <div class="chip"><i style="background:var(--color-text-muted)"></i><div><b>Muted</b><small>Captions, meta. 5.3:1</small><span class="n">--color-text-muted</span></div></div>
+      <div class="chip"><i style="background:var(--color-accent)"></i><div><b>Chalk blue</b><small>The tailor's mark: links, notches, focus. 6.4:1</small><span class="n">--color-accent</span></div></div>
+      <div class="chip"><i style="background:var(--color-accent-wash)"></i><div><b>Chalk wash</b><small>Selected backgrounds</small><span class="n">--color-accent-wash</span></div></div>
+      <div class="chip"><i style="background:var(--color-line-strong)"></i><div><b>Control line</b><small>Input and swatch borders. 3.6:1</small><span class="n">--color-line-strong</span></div></div>
+      <div class="chip"><i style="background:var(--color-lattice)"></i><div><b>Stone shadow</b><small>Lattice light only, never text</small><span class="n">--color-lattice</span></div></div>
+      <div class="chip"><i style="background:var(--color-sand)"></i><div><b>Sandstone</b><small>Inside photos and room light only</small><span class="n">--color-sand</span></div></div>
+      <div class="chip"><i style="background:linear-gradient(90deg,var(--color-success) 0 33.3%,var(--color-warn) 0 66.6%,var(--color-error) 0)"></i><div><b>Feedback</b><small>In stock 5.4 / Low 5.6 / Error 5.8 (:1)</small><span class="n">success / warn / error</span></div></div>
+    </div>
+  </section>
+
+  <!-- CONTROLS -->
+  <section class="sec" id="controls" aria-labelledby="h-ctl">
+    <div class="sec-head"><p class="note"><span class="mark"></span>Controls</p><h2 id="h-ctl">The cut means "ready"</h2>
+      <p>The primary button has a notch cut into its top edge. A disabled button is uncut: not ready yet. Loading shows a cut-line travelling along the bottom edge.</p></div>
+    <div class="sheet states">
+      <div class="state"><button class="btn" type="button">Add to bag</button><span class="n">Default</span></div>
+      <div class="state"><button class="btn is-hover" type="button">Add to bag</button><span class="n">Hover</span></div>
+      <div class="state"><button class="btn is-active" type="button">Add to bag</button><span class="n">Pressed</span></div>
+      <div class="state"><button class="btn is-focus" type="button">Add to bag</button><span class="n">Focus</span></div>
+      <div class="state"><button class="btn" type="button" disabled>Select a size</button><span class="n">Disabled</span></div>
+      <div class="state"><button class="btn is-loading" type="button" aria-busy="true">Adding</button><span class="n">Loading</span></div>
+      <div class="state"><button class="btn-2" type="button">Open in Studio</button><span class="n">Secondary</span></div>
+      <div class="state"><a class="btn-3" href="#controls">Size guide</a><span class="n">Text link</span></div>
+    </div>
+    <div class="grid2">
+      <div class="sheet" style="display:grid;gap:var(--sp-5)">
+        <div class="field"><label for="ph">Phone number</label><input id="ph" inputmode="tel" value="0300 1234567"><span class="help">For the courier. Focus shows the dashed cut-line.</span></div>
+        <div class="field err"><label for="ct">City</label><input id="ct" value="Lahor" aria-invalid="true" aria-describedby="ct-h"><span class="help" id="ct-h">Choose a city from the list, such as Lahore.</span></div>
+      </div>
+      <div class="sheet" style="display:grid;gap:var(--sp-5)">
+        <div style="display:grid;gap:10px"><span class="t-ui">Size</span>
+          <div class="sizes" role="group" aria-label="Size">
+            <button class="size" type="button" aria-pressed="false">S</button><button class="size" type="button" aria-pressed="true">M</button><button class="size" type="button" aria-pressed="false">L</button><button class="size" type="button" disabled aria-label="XL, sold out">XL</button>
+          </div></div>
+        <div style="display:grid;gap:10px"><span class="t-ui">Colour: Ash grey</span>
+          <div class="swatches" role="group" aria-label="Colour">
+            <button class="sw" type="button" aria-pressed="true" aria-label="Ash grey" style="background:#8D8F8A"></button>
+            <button class="sw" type="button" aria-pressed="false" aria-label="Indigo" style="background:#2A3140"></button>
+            <button class="sw" type="button" aria-pressed="false" aria-label="Wheat" style="background:#B9AE96"></button>
+          </div></div>
+        <div class="stock"><span class="dot" style="background:var(--color-warn)"></span><span style="color:var(--color-warn)">Only 2 left in M</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- NAV -->
+  <section class="sec" id="nav" aria-labelledby="h-nav">
+    <div class="sec-head"><p class="note"><span class="mark"></span>Navigation</p><h2 id="h-nav">A slim bar, and a pattern-sheet menu</h2>
+      <p>The bar stays out of the photography. The menu lays the categories out as labelled pattern pieces, with the current exhibition as the largest.</p></div>
+    <div class="bar">
+      <a class="brand" href="#nav">DARZ</a>
+      <nav aria-label="Demo">
+        <a class="hide-sm" href="#nav">Exhibitions</a><a class="hide-sm" href="#nav">Shop</a><a href="#nav">Studio</a>
+        <button class="iconbtn" type="button" aria-label="Search"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"><circle cx="10.5" cy="10.5" r="6"/><path d="M15 15l5 5"/></svg></button>
+        <button class="iconbtn" type="button" aria-label="Bag, 2 items"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"><path d="M5 8h14l-1 13H6z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg><span class="count">2</span></button>
+        <button class="iconbtn" type="button" aria-label="Menu"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"><path d="M4 7h16M4 12h10M4 17h16"/></svg></button>
+      </nav>
+    </div>
+    <div class="patternsheet" aria-label="Menu preview">
+      <a class="piece p1" href="#nav"><span class="n">Current exhibition</span><b>The Courtyard Edit</b></a>
+      <a class="piece p2" href="#nav"><span class="n">Cut 2</span><b>Traditional</b></a>
+      <a class="piece p3" href="#nav"><span class="n">Cut 1</span><b>Formal</b></a>
+      <a class="piece p4" href="#nav"><span class="n">On fold</span><b>Shirts</b></a>
+      <a class="piece p5" href="#nav"><span class="n">Cut 2</span><b>Casual</b></a>
+      <a class="piece p6" href="#nav"><span class="n">Per suit</span><b>Unstitched</b></a>
+      <a class="piece p7" href="#nav"><span class="n">Cut 1</span><b>Trousers</b></a>
+    </div>
+  </section>
+
+  <!-- SIGNATURE -->
+  <section class="sec" id="signature" aria-labelledby="h-sig">
+    <div class="sec-head"><p class="note"><span class="mark"></span>Signature elements</p><h2 id="h-sig">Aperture, notch, lattice, notation</h2>
+      <p>Four recurring elements make one system. Each has places it lives and places it must never go.</p></div>
+
+    <h3 class="t-h3">1. Apertures: hero and featured images only</h3>
+    <div class="aps">
+      <figure class="ap" style="margin:0"><svg viewBox="0 0 100 125" aria-hidden="true"><rect width="100" height="125" class="fabric" clip-path="url(#ap-front)"/></svg><span class="n">Front: home hero</span></figure>
+      <figure class="ap" style="margin:0"><svg viewBox="0 0 100 125" aria-hidden="true"><rect width="100" height="125" class="fabric" clip-path="url(#ap-sleeve)"/></svg><span class="n">Sleeve: room teasers</span></figure>
+      <figure class="ap" style="margin:0"><svg viewBox="0 0 100 125" aria-hidden="true"><rect width="100" height="125" class="fabric" clip-path="url(#ap-yoke)"/></svg><span class="n">Yoke: material study</span></figure>
+      <figure class="ap" style="margin:0"><svg viewBox="0 0 100 125" aria-hidden="true"><rect width="100" height="125" class="fabric" clip-path="url(#ap-arch)"/></svg><span class="n">Jali arch: traditional</span></figure>
+    </div>
+
+    <div class="grid3">
+      <div class="cell"><div class="img" role="img" aria-label="Product image placeholder"></div><div class="meta"><b>Band-collar kurta</b><span class="t-price" style="font-size:15px">Rs 8,450</span></div><span class="avail">S M L, XL sold out</span></div>
+      <div style="display:grid;gap:12px;align-content:start;grid-column:span 2">
+        <h3 class="t-h3">2. The notch</h3>
+        <p>Product cells stay rectangles so the wall stays easy to shop. A small notch is cut into the bottom edge, and it widens on hover. The notch also marks the primary button, selected sizes, section labels and toasts.</p>
+        <p><b style="color:var(--color-text)">Never</b> on every card corner, icons, body text, or more than one per control.</p>
+      </div>
+    </div>
+
+    <div class="lattice" aria-label="Lattice light example">
+      <svg viewBox="0 0 400 200" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><g filter="url(#soft)"><rect width="400" height="200" fill="url(#jali)"/></g></svg>
+      <div class="over"><span class="note">3. Lattice light</span><b>THE COURTYARD</b></div>
+    </div>
+    <p>Lattice light drifts slowly (26 s loop) and appears at most once per view: the home entrance, an exhibition title or the Studio table. It stops for reduced motion and stays behind text at decorative contrast only.</p>
+
+    <div class="grid2">
+      <dl class="notation">
+        <dt>Weave</dt><dd>Khaddar, handloom<small>Slubbed yarns give a dry, textured hand</small></dd>
+        <dt>Weight</dt><dd>180 GSM<small>Grams per square metre: mid-weight, holds a collar</small></dd>
+        <dt>Grain</dt><dd>Warp, cut 1 on fold<small>Seams hang straight and don't twist</small></dd>
+      </dl>
+      <div style="display:grid;gap:12px;align-content:start">
+        <h3 class="t-h3">4. Pattern notation</h3>
+        <p>Fabric facts are set like a tailor's marks inside a dashed cut-line, and every term is explained in plain words. The notation face appears <b style="color:var(--color-text)">only</b> here, on Studio slot labels and in the menu piece labels.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ICONS -->
+  <section class="sec" id="icons" aria-labelledby="h-ic">
+    <div class="sec-head"><p class="note"><span class="mark"></span>Icons</p><h2 id="h-ic">Drawn with a tailor's pencil</h2>
+      <p>A custom set on a 24 grid with a 1.5 stroke and square caps and joins, like pencil on pattern paper. Shortlisting uses a tailor's pin, not a heart.</p></div>
+    <div class="icons">
+      <div class="ic"><svg viewBox="0 0 24 24"><path d="M5 8h14l-1 13H6z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg><span>bag</span></div>
+      <div class="ic"><svg viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6"/><path d="M15 15l5 5"/></svg><span>search</span></div>
+      <div class="ic"><svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h10M4 17h16"/></svg><span>menu</span></div>
+      <div class="ic"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg><span>close</span></div>
+      <div class="ic"><svg viewBox="0 0 24 24"><path d="M4 12h15M13 6l6 6-6 6"/></svg><span>arrow</span></div>
+      <div class="ic"><svg viewBox="0 0 24 24"><circle cx="8" cy="8" r="2.5"/><path d="M10 10l10 10"/></svg><span>pin</span></div>
+      <div class="ic"><svg viewBox="0 0 24 24"><path d="M3 15L15 3l6 6L9 21z"/><path d="M7 11l2 2M10 8l2 2M13 5l2 2"/></svg><span>size guide</span></div>
+      <div class="ic"><svg viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg><span>lock</span></div>
+      <div class="ic"><svg viewBox="0 0 24 24"><path d="M12 4v11M7 9l5-5 5 5M5 14v6h14v-6"/></svg><span>share</span></div>
+      <div class="ic"><svg viewBox="0 0 24 24"><path d="M5 12l4 4 10-10"/></svg><span>check</span></div>
+      <div class="ic"><svg viewBox="0 0 24 24"><path d="M4 7l4-3 4 3 4-3 4 3"/><path d="M4 7v13h16V7"/></svg><span>shuffle look</span></div>
+      <div class="ic"><svg viewBox="0 0 24 24"><path d="M12 3v18" stroke-dasharray="2 2"/><path d="M4 6h6v12H4zM14 6h6v12h-6z"/></svg><span>compare</span></div>
+    </div>
+  </section>
+
+  <!-- LAYOUT & MOTION -->
+  <section class="sec" id="layout" aria-labelledby="h-lay">
+    <div class="sec-head"><p class="note"><span class="mark"></span>Layout, edges, motion</p><h2 id="h-lay">The jali module</h2></div>
+    <div class="grid3">
+      <div class="sheet" style="display:grid;gap:10px;align-content:start">
+        <h3 class="t-h3">Grid</h3>
+        <p>12 columns from 1200 px (24 gap, 48 gutter), 8 columns from 768 px (20 gap, 32 gutter), 4 on mobile (16 gap, 16 gutter). Content max 1280, full-bleed max 1440.</p>
+        <p>Spacing is 4-based: 4, 8, 12, 16, 24, 32, 48, 64, 96, 128, 160. Sections are 64–160 apart.</p>
+        <p>Breakpoints are designed at 390, 768, 1024 and 1440.</p>
+      </div>
+      <div class="sheet" style="display:grid;gap:10px;align-content:start">
+        <h3 class="t-h3">Edges</h3>
+        <p><b style="color:var(--color-text)">0 radius</b> for apertures, sheets and buttons (cut paper). <b style="color:var(--color-text)">2 px</b> for inputs and swatches. Round only for the bag count and colour dots.</p>
+        <p>No card shadows. One shadow exists: the raking-light cast under a Studio piece being dragged.</p>
+        <div class="piece-drag" aria-hidden="true"></div>
+      </div>
+      <div class="sheet" style="display:grid;gap:10px;align-content:start">
+        <h3 class="t-h3">Motion tokens</h3>
+        <p><span class="n">Cut</span>: cubic-bezier(.2,.7,.2,1). Apertures and sheets.</p>
+        <p><span class="n">Assemble</span>: cubic-bezier(.32,0,.12,1). Pieces meeting at a notch.</p>
+        <p>Durations: 120 micro, 240 UI, 480 assemble, 700 reveal, 26 s drift. Nothing bounces. Everything stops for reduced motion.</p>
+        <div class="toast" role="status"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12l4 4 10-10"/></svg>Added to bag: Band-collar kurta, M</div>
+      </div>
+    </div>
+    <div class="grid2">
+      <div class="do"><h3 class="t-h4" style="font-size:18px">Do</h3><ul class="rules"><li>Keep <b>one</b> memorable thing per view: an aperture or lattice light, never both at full strength.</li><li>Always show price and sizes in stock on product cells.</li><li>Take colours from tokens; brand colours can be overridden in Settings.</li></ul></div>
+      <div class="dont"><h3 class="t-h4" style="font-size:18px">Don't</h3><ul class="rules"><li>Sale badges in red, urgency colours, countdown banners.</li><li>Notation font for general labels or eyebrows.</li><li>Sandstone as a button, link or background colour.</li></ul></div>
+    </div>
+  </section>
+</main>
+
+<script>
+(function(){var r=document.getElementById('axis'),w=document.getElementById('axisWord'),o=document.getElementById('axisOut');
+r.addEventListener('input',function(){w.style.fontVariationSettings="'wdth' "+r.value;o.textContent=r.value;});
+document.querySelectorAll('.sizes .size:not(:disabled)').forEach(function(b){b.addEventListener('click',function(){document.querySelectorAll('.sizes .size').forEach(function(x){x.setAttribute('aria-pressed','false')});b.setAttribute('aria-pressed','true')})});
+document.querySelectorAll('.swatches .sw').forEach(function(b){b.addEventListener('click',function(){document.querySelectorAll('.swatches .sw').forEach(function(x){x.setAttribute('aria-pressed','false')});b.setAttribute('aria-pressed','true')})});
+})();
+</script>
